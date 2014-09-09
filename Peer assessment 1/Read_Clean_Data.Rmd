@@ -66,3 +66,29 @@ The mean and median:
 ```{r}
 medMean
 ```
+NB: I tried to use xtable, but it did not work. Tried the presentation examples, also did not work. I will inquire when time permits....
+
+###3. What is the average daily pattern?
+
+**1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)**
+
+The initial table activityDataTable includes 5 minute intervals.Use these intervals to make the required plot.
+```{r}
+ADTIntervals<-activityDataTable[,list(meanSteps=mean(steps,na.rm=TRUE)),interval]
+```
+Create the plot again using ggplot2 of the 5 minute intervals and the average number of steps takewn across the days.
+```{r}
+ggplot(ADTIntervals,aes(x=interval,y=meanSteps))+geom_line()
+```
+
+**2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
+
+In first place, find the maximum value of meanSteps in ADTIntervals.
+```{r}
+maxStep<-max(ADTIntervals$meanSteps)
+```
+Then find which interval matches this value.
+```{r}
+ADTIntervals[which(ADTIntervals$meanSteps==maxStep)]
+```
+
