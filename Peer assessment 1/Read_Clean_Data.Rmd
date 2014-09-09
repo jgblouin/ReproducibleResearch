@@ -1,0 +1,35 @@
+---
+title: "Loading_Preprocessing_Data"
+author: "jgblouin"
+date: "Tuesday, September 09, 2014"
+output: html_document
+---
+# Loading the Data
+
+Ensure that the code is always visible.
+```{r setoptions, echo=TRUE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+The data is read from a CSV file activity.csv located in the folder "./Reproducible Research/Peer assessment 1/Data/activity.csv"
+
+```{r}
+activityData<-read.csv("C:/Users/SUPER JG/Documents/Coursera Data Science/Reproducible Research/Peer assessment 1/Data/activity.csv")
+```
+Examine the first lines of data using head() and summary().
+```{r}
+head(activityData)
+summary(activityData)
+```
+#Cleaning the data
+This indicates the presence of NA values and the date format will be modified.But first, save the data as a data table.
+```{r}
+library(data.table)
+activityDataTable<-data.table(activityData)
+```
+Convert the dates to a Date class.
+```{r}
+activityDataTable[, date := as.Date(date)]
+```
+
+
