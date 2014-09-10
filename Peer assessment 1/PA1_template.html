@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>1. Loading and cleaning the Data</title>
+<title>Peer Assessment 1</title>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -187,6 +187,8 @@ hr {
 </head>
 
 <body>
+<h2>Peer Assessment 1</h2>
+
 <h3>1. Loading and cleaning the Data</h3>
 
 <p>Ensure that the code is always visible.</p>
@@ -197,12 +199,32 @@ hr {
 <p>Load the necessary libraries.</p>
 
 <pre><code class="r">library(data.table)
-library(ggplot2)
+</code></pre>
+
+<pre><code>## data.table 1.9.2  For help type: help(&quot;data.table&quot;)
+</code></pre>
+
+<pre><code class="r">library(ggplot2)
 library(xtable)
 library(VIM)
 </code></pre>
 
-<p>The data is read from a CSV file activity.csv located in the folder &ldquo;./Reproducible Research/Peer assessment 1/Data/activity.csv&rdquo;</p>
+<pre><code>## Loading required package: colorspace
+## Loading required package: grid
+## VIM is ready to use. 
+##  Since version 4.0.0 the GUI is in its own package VIMGUI.
+## 
+##           Please use the package to use the new (and old) GUI.
+## 
+## 
+## Attaching package: &#39;VIM&#39;
+## 
+## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     sleep
+</code></pre>
+
+<p>The data is read from a CSV file activity.csv located in the folder &ldquo;C:/Users/SUPER JG/Documents/Coursera Data Science/Reproducible Research/Peer assessment 1/Data/activity.csv&rdquo;</p>
 
 <pre><code class="r">activityData&lt;-read.csv(&quot;C:/Users/SUPER JG/Documents/Coursera Data Science/ReproducibleResearch/Peer assessment 1/Data/activity.csv&quot;)
 </code></pre>
@@ -267,7 +289,7 @@ library(VIM)
 ## 17568:    NA 2012-11-30     2355
 </code></pre>
 
-<p>###2. What is mean total number of steps taken per day?</p>
+<h3>2. What is mean total number of steps taken per day?</h3>
 
 <p>For this part of the assignment, you can ignore the missing values in the dataset.</p>
 
@@ -317,7 +339,7 @@ library(VIM)
 
 <p>NB: I tried to use xtable, but it did not work. Tried the presentation examples, also did not work. I will inquire when time permits&hellip;.</p>
 
-<p>###3. What is the average daily pattern?</p>
+<h3>3. What is the average daily pattern?</h3>
 
 <p><strong>1. Make a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</strong></p>
 
@@ -349,7 +371,7 @@ library(VIM)
 ## 1:      835     206.2
 </code></pre>
 
-<p>###4. Imputing missing values</p>
+<h3>4. Imputing missing values</h3>
 
 <p>Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.</p>
 
@@ -381,7 +403,7 @@ structure of the missing and/or imputed values&rdquo;.</p>
 <pre><code class="r">imputedActivity&lt;-kNN(activityDataTable)
 </code></pre>
 
-<pre><code>## Time difference of -4.868 secs
+<pre><code>## Time difference of -5.106 secs
 </code></pre>
 
 <p>A quick verification shows that no NA values are present in the new data set.</p>
@@ -408,7 +430,7 @@ structure of the missing and/or imputed values&rdquo;.</p>
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-19"/> </p>
 
-<p>The median and the mean are now calculated for thwe imputed set.</p>
+<p>The median and the mean are now calculated for the imputed set.</p>
 
 <pre><code class="r">medMeanImputed&lt;-dailyStepsImputed[,list(n = .N, nValid = sum(!is.na(totalsteps)), mean = mean(totalsteps,na.rm = TRUE), median = median(totalsteps, na.rm = TRUE))]
 </code></pre>
@@ -431,8 +453,7 @@ structure of the missing and/or imputed values&rdquo;.</p>
 ## 1: 61     53 10766  10765
 </code></pre>
 
-<p>The difference between the 2 sets is given by
-This can be compared with the original values before imputing:</p>
+<p>The difference between the 2 sets is given by</p>
 
 <pre><code class="r">medMean - medMeanImputed
 </code></pre>
@@ -444,7 +465,7 @@ This can be compared with the original values before imputing:</p>
 <p>Comparing these values shows that the median for the imputed set is approximately the same as the median of the original set, whereas the difference for the means is significantly larger.<br/>
 One can thus estimate the impact of imputing missing data as lowering the estimates of the numbers of steps taken each day.</p>
 
-<p>###5. Are there differences in activity patterns between weekdays and weekends?</p>
+<h3>5. Are there differences in activity patterns between weekdays and weekends?</h3>
 
 <p>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part (imputedActivity).<br/>
 <strong>1. Create a new factor variable in the dataset with two levels &ndash; &ldquo;weekday&rdquo; and &ldquo;weekend&rdquo; indicating whether a given date is a weekday or weekend day.</strong></p>
@@ -474,7 +495,7 @@ imputedActivity[, .N, list(dayType, dayOfWeek)]
 <pre><code>## Is dayOfWeek a factor? TRUE. Is dayType a factor? TRUE
 </code></pre>
 
-<p><strong>2. Make a panel plot containing a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</strong>
+<p><strong>2. Make a panel plot containing a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</strong><br/>
 This is the same as section 3.1 for the new data set over weekdays and weekends.</p>
 
 <pre><code class="r">ADTIntervalsImputed&lt;-imputedActivity[, list(meanSteps = mean(steps, na.rm = TRUE)), list(dayType, interval)]

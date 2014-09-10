@@ -4,6 +4,8 @@ author: "jgblouin"
 date: "Tuesday, September 09, 2014"
 output: html_document
 ---
+## Peer Assessment 1
+
 ### 1. Loading and cleaning the Data
 
 Ensure that the code is always visible.
@@ -16,11 +18,34 @@ Load the necessary libraries.
 
 ```r
 library(data.table)
+```
+
+```
+## data.table 1.9.2  For help type: help("data.table")
+```
+
+```r
 library(ggplot2)
 library(xtable)
 library(VIM)
 ```
-The data is read from a CSV file activity.csv located in the folder "./Reproducible Research/Peer assessment 1/Data/activity.csv"
+
+```
+## Loading required package: colorspace
+## Loading required package: grid
+## VIM is ready to use. 
+##  Since version 4.0.0 the GUI is in its own package VIMGUI.
+## 
+##           Please use the package to use the new (and old) GUI.
+## 
+## 
+## Attaching package: 'VIM'
+## 
+## The following object is masked from 'package:datasets':
+## 
+##     sleep
+```
+The data is read from a CSV file activity.csv located in the folder "C:/Users/SUPER JG/Documents/Coursera Data Science/Reproducible Research/Peer assessment 1/Data/activity.csv"
 
 
 ```r
@@ -93,7 +118,7 @@ activityDataTable[, date := as.Date(date)]
 ## 17567:    NA 2012-11-30     2350
 ## 17568:    NA 2012-11-30     2355
 ```
-###2. What is mean total number of steps taken per day?
+### 2. What is mean total number of steps taken per day?
 
 For this part of the assignment, you can ignore the missing values in the dataset.
 
@@ -146,7 +171,7 @@ medMean
 ```
 NB: I tried to use xtable, but it did not work. Tried the presentation examples, also did not work. I will inquire when time permits....
 
-###3. What is the average daily pattern?
+### 3. What is the average daily pattern?
 
 **1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)**
 
@@ -180,7 +205,7 @@ ADTIntervals[which(ADTIntervals$meanSteps==maxStep)]
 ##    interval meanSteps
 ## 1:      835     206.2
 ```
-###4. Imputing missing values
+### 4. Imputing missing values
 
 Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
@@ -217,7 +242,7 @@ imputedActivity<-kNN(activityDataTable)
 ```
 
 ```
-## Time difference of -4.868 secs
+## Time difference of -5.106 secs
 ```
 
 A quick verification shows that no NA values are present in the new data set.
@@ -248,7 +273,7 @@ ggplot(dailyStepsImputed,aes(x=totalsteps)) + geom_histogram(alpha = 1/2, binwid
 
 ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19.png) 
 
-The median and the mean are now calculated for thwe imputed set.
+The median and the mean are now calculated for the imputed set.
 
 ```r
 medMeanImputed<-dailyStepsImputed[,list(n = .N, nValid = sum(!is.na(totalsteps)), mean = mean(totalsteps,na.rm = TRUE), median = median(totalsteps, na.rm = TRUE))]
@@ -274,7 +299,6 @@ medMean
 ## 1: 61     53 10766  10765
 ```
 The difference between the 2 sets is given by
-This can be compared with the original values before imputing:
 
 ```r
 medMean - medMeanImputed
@@ -288,7 +312,7 @@ medMean - medMeanImputed
 Comparing these values shows that the median for the imputed set is approximately the same as the median of the original set, whereas the difference for the means is significantly larger.  
 One can thus estimate the impact of imputing missing data as lowering the estimates of the numbers of steps taken each day.
 
-###5. Are there differences in activity patterns between weekdays and weekends?
+### 5. Are there differences in activity patterns between weekdays and weekends?
 
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part (imputedActivity).  
 **1. Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.**
@@ -320,7 +344,7 @@ message(sprintf("Is dayOfWeek a factor? %s. Is dayType a factor? %s", is.factor(
 ```
 ## Is dayOfWeek a factor? TRUE. Is dayType a factor? TRUE
 ```
-**2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).**
+**2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).**  
 This is the same as section 3.1 for the new data set over weekdays and weekends.
 
 ```r
